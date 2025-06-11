@@ -1,16 +1,14 @@
-import { neon } from "@neondatabase/serverless";
+import { Challenge } from "./models";
+import { turso } from "@/lib/turso";
 
-export async function checkDbConnection() {
-  if (!process.env.DATABASE_URL) {
-    return "No DATABASE_URL environment variable";
-  }
-  try {
-    const sql = neon(process.env.DATABASE_URL);
-    const result = await sql`SELECT version()`;
-    console.log("Pg version:", result);
-    return "Database connected";
-  } catch (error) {
-    console.error("Error connecting to the database:", error);
-    return "Database not connected";
-  }
+export async function listChallenges(): Promise<Challenge[]> {
+  const response = await turso.execute("SELECT * FROM challenges");
+  return response.rows as unknown as Challenge[];
+}
+export async function getChallenge(id: number): Promise<Challenge | null> {
+  const response = await turso.execute(
+    "SELECT * FROM challenges WHERE id = ?",
+    [id]
+  );
+  return response.rows[0] as unknown as Challenge;
 }

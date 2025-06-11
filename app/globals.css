@@ -2,8 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --retro-bg: #f0f0f0;
+  --retro-primary: #4a90e2;
+  --retro-secondary: #e74c3c;
+  --retro-text: #2c3e50;
+  --retro-border: #bdc3c7;
+}
+
 body {
   @apply relative min-w-[320px] min-h-screen antialiased;
-  @apply bg-white text-[#0C0D0D] dark:bg-black dark:text-white;
+  @apply bg-[var(--retro-bg)] text-[var(--retro-text)];
   -webkit-tap-highlight-color: transparent;
+}
+
+.retro-card {
+  @apply bg-white rounded-lg shadow-lg p-6;
+  border: 2px solid var(--retro-border);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.retro-title {
+  @apply text-4xl font-bold mb-4;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.retro-button {
+  @apply px-4 py-2 rounded font-bold transition-all;
+  background: var(--retro-primary);
+  color: white;
+  border: 2px solid var(--retro-border);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.retro-button:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.retro-button:active {
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
 }
